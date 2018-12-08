@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 
 ### Added
 
+* Derive PrefabData for CameraOrtho component ([#1188])
 * Partially migrate the project to Rust 2018.  Full migration will be completed at some point after 2019-01-31 ([#1098])
 * `SystemExt::pausable` for better ergonomics when pausing systems for specific states ([#1146]).
 * `amethyst_test` test framework for ergonomic testing of Amethyst applications ([#1000])
@@ -26,9 +27,11 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 * `sprite_camera_follow` example showing how to use a Camera that has a sprite Parent ([#1099])
 * Added capabilities for the `DrawFlat2D` pass to draw `TextureHandle`s by themselves. Also added a simple example for this. ([#1153])
 * Added a `Flipped` component which allows flipping sprites or images horizontally and vertically. ([#1153])
+* Added transform constructor function `Transform::new()`. ([#1187])
 
 ### Changed
 
+* Minimum Rust version is now `1.31.0` &ndash; Rust 2018. ([#1224])
 * `Transform::look_at` renamed to `Transform::face_towards` and behavior fixed. ([#1142])
 * `Material` animations now directly use `Handle<Texture>` instead of using indirection. ([#1089])
 * `SpriteRenderPrimitive::SpriteSheet` now takes `Handle<SpriteSheet>` instead of a `u64` ID. ([#1089])
@@ -41,6 +44,7 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 * Renamed the `DrawSprite` pass to `DrawFlat2D` as it now handles both sprites and images without spritesheets. ([#1153])
 * `BasicScenePrefab` deserialization now returns an error on invalid fields. ([#1164])
 * Reordered arguments for `Transform::set_rotation_euler` to match nalgebra's Euler angles. ([#1052])
+* Remove lifetimes from `SimpleState` ([#1198])
 
 ### Removed
 
@@ -48,8 +52,11 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 * `MaterialTextureSet` is removed as it is no longer needed. ([#1117])
 * `amethyst::core::Orientation` has been removed because of limited use. ([#1066])
 * `TimedDestroySystem` has been split into `DestroyAtTimeSystem` and `DestroyInTimeSystem`. ([#1129])
+* Reverted [MacOS OpenGL workaround][#972] in favor of the upstream fix in `glutin`. ([#1184])
 
 ### Fixed
+
+* `SpriteSheetFormat` converts pixel coordinates to texture coordinates on load. ([#1181])
 
 [#1146]: https://github.com/amethyst/amethyst/pull/1146
 [#1144]: https://github.com/amethyst/amethyst/pull/1144
@@ -74,6 +81,14 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 [#1131]: https://github.com/amethyst/amethyst/pull/1131
 [#1153]: https://github.com/amethyst/amethyst/pull/1153
 [#1164]: https://github.com/amethyst/amethyst/pull/1164
+[#1142]: https://github.com/amethyst/amethyst/pull/1142
+[#1052]: https://github.com/amethyst/amethyst/pull/1052
+[#1181]: https://github.com/amethyst/amethyst/pull/1181
+[#1184]: https://github.com/amethyst/amethyst/pull/1184
+[#1187]: https://github.com/amethyst/amethyst/pull/1187
+[#1188]: https://github.com/amethyst/amethyst/pull/1188
+[#1198]: https://github.com/amethyst/amethyst/pull/1198
+[#1224]: https://github.com/amethyst/amethyst/pull/1224
 [winit_018]: https://github.com/tomaka/winit/blob/v0.18.0/CHANGELOG.md#version-0180-2018-11-07
 [glutin_019]: https://github.com/tomaka/glutin/blob/master/CHANGELOG.md#version-0190-2018-11-09
 
@@ -692,3 +707,4 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 [0.4.1]: https://github.com/amethyst/amethyst/compare/v0.4...v0.4.1
 [0.4.0]: https://github.com/amethyst/amethyst/compare/v0.3.1...v0.4
 [0.3.1]: https://github.com/amethyst/amethyst/compare/v0.3...v0.3.1
+
