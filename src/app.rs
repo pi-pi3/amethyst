@@ -388,8 +388,9 @@ impl<'a, T, E, R> Drop for CoreApplication<'a, T, E, R> {
     fn drop(&mut self) {
         // TODO: Specify filename in config.
         use crate::utils::application_root_dir;
-        let path = format!("{}/thread_profile.json", application_root_dir());
-        write_profile(path.as_str());
+        let app_root = application_root_dir().expect("application root dir to exist");
+        let path = app_root.join("thread_profile.json");
+        write_profile(path.to_str().expect("application root dir to be a string"));
     }
 }
 
@@ -674,8 +675,8 @@ where
     ///     .run();
     ///
     /// struct LoadingState;
-    /// impl<'a, 'b> SimpleState<'a, 'b> for LoadingState {
-    ///     fn on_start(&mut self, data: StateData<GameData>) {
+    /// impl SimpleState for LoadingState {
+    ///     fn on_start(&mut self, data: StateData<'_, GameData<'_, '_>>) {
     ///         let storage = data.world.read_resource();
     ///
     ///         let loader = data.world.read_resource::<Loader>();
