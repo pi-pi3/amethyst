@@ -11,18 +11,41 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 
 ### Added
 
+* Introduce `application_dir` utility ([#1213])
+* Derive `Copy`, `PartialEq`, `Eq`, `Serialize`, `Deserialize` for `Flipped` component. ([#1237])
+* A way to change the default `Source` using `set_default_source` and `with_default_source`. ([#1256])
+* "How To" guides for using assets and defining custom assets. ([#1251])
+* `amethyst_renderer::Rgba` is now a `Component` that changes the color and transparency of the entity
+it is attached to. ([#1282])
+* `AutoFov` and `AutoFovSystem` to adjust horizontal FOV to screen aspect ratio. ([#1281])
+
 ### Changed
+
+* Make `application_root_dir` return a `Result<Path>` instead of a `String` ([#1213])
+* Remove unnecessary texture coordinates offset in `Sprite::from_pixel_values` ([#1267])
+* Changed `ActiveCamera` to have the `Option` inside. ([#1280])
 
 ### Removed
 
 ### Fixed
 
+* Fixed the "json" feature for amethyst_assets. ([#1302])
+
+[#1213]: https://github.com/amethyst/amethyst/pull/1213
+[#1237]: https://github.com/amethyst/amethyst/pull/1237
+[#1251]: https://github.com/amethyst/amethyst/pull/1251
+[#1256]: https://github.com/amethyst/amethyst/pull/1256
+[#1267]: https://github.com/amethyst/amethyst/pull/1267
+[#1280]: https://github.com/amethyst/amethyst/pull/1280
+[#1282]: https://github.com/amethyst/amethyst/pull/1282
+[#1281]: https://github.com/amethyst/amethyst/pull/1281
+[#1302]: https://github.com/amethyst/amethyst/pull/1302
+
 ## [0.10.0] - 2018-12
 
 ### Added
 
-* Introduce `application_dir` utility ([#1213])
-* Derive PrefabData for CameraOrtho component ([#1188])
+* Derive `PrefabData` for `CameraOrtho` component ([#1188])
 * Partially migrate the project to Rust 2018.  Full migration will be completed at some point after 2019-01-31 ([#1098])
 * `SystemExt::pausable` for better ergonomics when pausing systems for specific states ([#1146]).
 * `amethyst_test` test framework for ergonomic testing of Amethyst applications ([#1000])
@@ -39,10 +62,10 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 * Added capabilities for the `DrawFlat2D` pass to draw `TextureHandle`s by themselves. Also added a simple example for this. ([#1153])
 * Added a `Flipped` component which allows flipping sprites or images horizontally and vertically. ([#1153])
 * Added transform constructor function `Transform::new()`. ([#1187])
+* Implement generic `EventRetriggerSystem`, which enables dispatching new events as a reaction to other events ([#1189])
 
 ### Changed
 
-* Make `application_root_dir` return a `Result<Path>` instead of a `String` ([#1213])
 * Minimum Rust version is now `1.31.0` &ndash; Rust 2018. ([#1224])
 * `Transform::look_at` renamed to `Transform::face_towards` and behavior fixed. ([#1142])
 * `Material` animations now directly use `Handle<Texture>` instead of using indirection. ([#1089])
@@ -57,6 +80,7 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 * `BasicScenePrefab` deserialization now returns an error on invalid fields. ([#1164])
 * Reordered arguments for `Transform::set_rotation_euler` to match nalgebra's Euler angles. ([#1052])
 * Remove lifetimes from `SimpleState` ([#1198])
+* Button interactions are now handled through an `EventRetriggerSystem`, specifically hover/click sounds and image/color changes ([#1189])
 
 ### Removed
 
@@ -65,12 +89,12 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 * `amethyst::core::Orientation` has been removed because of limited use. ([#1066])
 * `TimedDestroySystem` has been split into `DestroyAtTimeSystem` and `DestroyInTimeSystem`. ([#1129])
 * Reverted [MacOS OpenGL workaround][#972] in favor of the upstream fix in `glutin`. ([#1184])
+* `OnUiActionImage` and `OnUiActionSound` have been removed as they now work through `EventRetrigger`s ([#1189])
 
 ### Fixed
 
 * `SpriteSheetFormat` converts pixel coordinates to texture coordinates on load. ([#1181])
 
-[#1213]: https://github.com/amethyst/amethyst/pull/1213
 [#1146]: https://github.com/amethyst/amethyst/pull/1146
 [#1144]: https://github.com/amethyst/amethyst/pull/1144
 [#1000]: https://github.com/amethyst/amethyst/pull/1000
@@ -102,6 +126,7 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 [#1188]: https://github.com/amethyst/amethyst/pull/1188
 [#1198]: https://github.com/amethyst/amethyst/pull/1198
 [#1224]: https://github.com/amethyst/amethyst/pull/1224
+[#1189]: https://github.com/amethyst/amethyst/pull/1189
 [winit_018]: https://github.com/tomaka/winit/blob/v0.18.0/CHANGELOG.md#version-0180-2018-11-07
 [glutin_019]: https://github.com/tomaka/glutin/blob/master/CHANGELOG.md#version-0190-2018-11-09
 
@@ -720,4 +745,3 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 [0.4.1]: https://github.com/amethyst/amethyst/compare/v0.4...v0.4.1
 [0.4.0]: https://github.com/amethyst/amethyst/compare/v0.3.1...v0.4
 [0.3.1]: https://github.com/amethyst/amethyst/compare/v0.3...v0.3.1
-

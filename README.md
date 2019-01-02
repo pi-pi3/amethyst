@@ -122,7 +122,7 @@ $ sudo dnf install alsa-lib-devel openssl-devel cmake freetype-devel expat-devel
 
 See your distribution specific installation process for the equivalent dependencies.
 
-Please note that you need to have a functionnal graphics driver installed.
+Please note that you need to have a functional graphics driver installed.
 If you get a panic about the renderer unable to create the context when trying to run an example,
 faulty driver installation can be the issue.
 
@@ -189,6 +189,20 @@ you can look through the [issue tracker][it].
 [pr]: https://github.com/amethyst/amethyst/projects
 [it]: https://github.com/amethyst/amethyst/issues
 [gfi]: https://github.com/amethyst/amethyst/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
+
+## Backers
+
+Thank you to all our backers! 🙏 [Become a backer](https://opencollective.com/amethyst#backer)
+
+<a href="https://opencollective.com/amethyst#backers" target="_blank"><img src="https://opencollective.com/amethyst/backers.svg?width=890"></a>
+
+## Sponsors
+Amethyst is supported by:
+<p>
+  <a href="https://www.digitalocean.com?utm_medium=opensource&utm_source=amethyst/">
+    <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/SVG/DO_Logo_horizontal_blue.svg" width="201px">
+  </a>
+</p>
 
 ## License
 

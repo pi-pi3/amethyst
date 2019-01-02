@@ -13,7 +13,7 @@ resources:
   webhook_token: ((webhook_token))
   source:
     repository: amethyst/amethyst
-    access_token: ((repo_github_token))
+    access_token: ((access_token))
 
 - name: amethyst-dependencies
   type: docker-image
@@ -43,17 +43,6 @@ jobs:
         params: { path: amethyst, status: failure, context: linux-tests }
   - put: pull-request
     params: { path: amethyst, status: success, context: linux-tests }
-
-  - put: pull-request
-    params: { path: amethyst, status: pending, context: linux-book-tests }
-  - task: book
-    image: amethyst-dependencies
-    file: amethyst/.concourse/tasks/linux-book.yml
-    on_failure:
-      put: pull-request
-      params: { path: amethyst, status: failure, context: linux-book-tests }
-  - put: pull-request
-    params: { path: amethyst, status: success, context: linux-book-tests }
 
 - name: linux-rustfmt
   public: true
