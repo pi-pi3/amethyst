@@ -1,6 +1,5 @@
-pub use self::{interleaved::DrawToon, separate::DrawToonSeparate};
+pub use self::separate::DrawToonSeparate;
 
-mod interleaved;
 mod separate;
 
 use crate::pass::util::TextureType;
