@@ -15,22 +15,27 @@ The format is based on [Keep a Changelog][kc], and this project adheres to
 * Derive `Copy`, `PartialEq`, `Eq`, `Serialize`, `Deserialize` for `Flipped` component. ([#1237])
 * A way to change the default `Source` using `set_default_source` and `with_default_source`. ([#1256])
 * "How To" guides for using assets and defining custom assets. ([#1251])
+* Explanation on how prefabs function in Amethyst. ([#1114])
 * `amethyst_renderer::Rgba` is now a `Component` that changes the color and transparency of the entity
 it is attached to. ([#1282])
 * `AutoFov` and `AutoFovSystem` to adjust horizontal FOV to screen aspect ratio. ([#1281])
+* `AudioBundle.with_dj_system(...)` initializes the `DjSystem` as part of the `AudioBundle`. ([#1346])
 
 ### Changed
 
 * Make `application_root_dir` return a `Result<Path>` instead of a `String` ([#1213])
 * Remove unnecessary texture coordinates offset in `Sprite::from_pixel_values` ([#1267])
 * Changed `ActiveCamera` to have the `Option` inside. ([#1280])
+* `AudioBundle::new()` accepts no arguments and no longer initializes a `DjSystem`. ([#1346])
 
 ### Removed
 
 ### Fixed
 
 * Fixed the "json" feature for amethyst_assets. ([#1302])
+* Fixed default system font loading to accept uppercase extension ("TTF"). ([#1328])
 
+[#1114]: https://github.com/amethyst/amethyst/pull/1114
 [#1213]: https://github.com/amethyst/amethyst/pull/1213
 [#1237]: https://github.com/amethyst/amethyst/pull/1237
 [#1251]: https://github.com/amethyst/amethyst/pull/1251
@@ -40,6 +45,8 @@ it is attached to. ([#1282])
 [#1282]: https://github.com/amethyst/amethyst/pull/1282
 [#1281]: https://github.com/amethyst/amethyst/pull/1281
 [#1302]: https://github.com/amethyst/amethyst/pull/1302
+[#1328]: https://github.com/amethyst/amethyst/pull/1328
+[#1346]: https://github.com/amethyst/amethyst/pull/1346
 
 ## [0.10.0] - 2018-12
 
